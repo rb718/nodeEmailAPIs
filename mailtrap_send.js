@@ -7,13 +7,13 @@ const { MailtrapClient } = require("mailtrap");
 const TOKEN = process.env.MAILTRAP_API_TOKEN;
 const ENDPOINT = process.env.MAILTRAP_API_ENDPOINT;
 
-const SENDER_EMAIL = process.env.FROM_EMAIL;
+const SENDER_EMAIL = process.env.EMAIL_FROM;
 const RECIPIENT_EMAIL = "recipient@email.com";
 
 const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
 const sender = {
-  name: "Sender Name",
+  name: process.env.SENDER_NAME,
   email: process.env.MAILTRAP_SENDER_EMAIL,
 };
 
@@ -27,8 +27,8 @@ client
   .send({
     from: sender,
     to: [{ email: RECIPIENT_EMAIL }],
-    subject: process.env.MAIL_SUBJECT,
-    text: process.env.MAIL_TEXT,
+    subject: process.env.EMAIL_SUBJECT,
+    text: process.env.EMAIL_TEXT,
   })
   .then(console.log, console.error);
 
