@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@elasticemail/elasticemail-client": "^4.0.23",
     "@sendgrid/client": "^7.7.0",
     "@sendgrid/mail": "^7.7.0",
     "dotenv": "^16.0.3",
