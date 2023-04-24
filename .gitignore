@@ -4,4 +4,4 @@ index.htm
 *.env*
 build
 *.log
-*test.*
+testEmail.js
