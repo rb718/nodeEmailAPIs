@@ -1,12 +1,12 @@
 "use strict";
 require("dotenv").config();
 
-const fs = require("fs");
-const XLSX = require("xlsx");
+import { readFileSync } from "fs";
+import { readFile } from "xlsx";
 
-const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
+const htmlFile = readFileSync("./index.htm", { encoding: "utf-8" });
 
-let workbook = XLSX.readFile("./emails.xlsx");
+let workbook = readFile("./emails.xlsx");
 let sheet_name_list = workbook.SheetNames;
 let emailList = [];
 let xlData = workbook.Sheets[sheet_name_list[0]];
@@ -22,8 +22,8 @@ for (let i = 1; i < xlKeys.length - 1; i++) {
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+import { setApiKey, send } from "@sendgrid/mail";
+setApiKey(process.env.SENDGRID_API_KEY);
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main(toEmail) {
@@ -34,8 +34,7 @@ async function main(toEmail) {
     text: process.env.MAIL_TEXT,
     html: htmlFile,
   };
-  sgMail
-    .send(msg)
+  send(msg)
     .then(() => {
       console.log("Email sent");
     })
