@@ -7,23 +7,8 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const XLSX = require("xlsx");
 
-const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
-
-let workbook = XLSX.readFile("./emails.xlsx");
-let sheet_name_list = workbook.SheetNames;
-let emailList = [];
-let xlData = workbook.Sheets[sheet_name_list[0]];
-let xlKeys = Object.keys(xlData);
-
-for (let i = 1; i < xlKeys.length - 1; i++) {
-  const key = xlKeys[i];
-  const emailName = xlData[key].v;
-  emailList.push(emailName);
-}
-// const emailTo = emailList.join(", "); // array to string
-
 // async..await is not allowed in global scope, must use a wrapper
-async function main(toEmail) {
+async function main(toEmail, htmlBody) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: process.env.ELASTICEMAIL_SMTP_HOST,
@@ -41,13 +26,22 @@ async function main(toEmail) {
     to: toEmail, // list of receivers
     subject: process.env.EMAIL_SUBJECT, // Subject line
     text: process.env.EMAIL_TEXT, // plain text body
-    html: htmlFile, // html body
+    html: htmlBody, // html body
   });
 
   console.log("Message sent: %s", info.messageId);
   console.log(info.envelope)
 }
 
-emailList.forEach(element => {
-    main(element).catch(console.error);
-});
+const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
+
+let workbook = XLSX.readFile("./emails.xlsx");
+let sheet_name_list = workbook.SheetNames;
+let xlData = workbook.Sheets[sheet_name_list[0]];
+let xlKeys = Object.keys(xlData);
+
+for (let i = 1; i < xlKeys.length - 1; i++) {
+  const key = xlKeys[i];
+  const emailName = xlData[key].v;
+  main(emailName, htmlFile).catch(console.error);
+}
