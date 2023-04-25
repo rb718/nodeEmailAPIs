@@ -57,7 +57,7 @@ const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
 
 // Read Email LIST from excel file
 const XLSX = require("xlsx");
-let workbook = XLSX.readFile("./emails.xlsx");
+let workbook = XLSX.readFile("./emails_elastic.xlsx");
 let sheet_name_list = workbook.SheetNames;
 let xlData = workbook.Sheets[sheet_name_list[0]];
 let xlKeys = Object.keys(xlData);

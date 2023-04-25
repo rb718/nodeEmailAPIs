@@ -31,7 +31,7 @@ async function main(toEmail, htmlBody) {
 
 const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
 
-let workbook = XLSX.readFile("./emails.xlsx");
+let workbook = XLSX.readFile("./emails_sendgrid.xlsx");
 let sheet_name_list = workbook.SheetNames;
 let xlData = workbook.Sheets[sheet_name_list[0]];
 let xlKeys = Object.keys(xlData);
