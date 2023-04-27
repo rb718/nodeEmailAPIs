@@ -8,7 +8,7 @@ const fs = require("fs");
 const XLSX = require("xlsx");
 
 // async..await is not allowed in global scope, must use a wrapper
-async function main(toEmail, htmlBody) {
+async function main(toEmail, htmlBody, indexN) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: process.env.ELASTICEMAIL_SMTP_HOST,
@@ -30,7 +30,7 @@ async function main(toEmail, htmlBody) {
   });
 
   console.log("Message sent: %s", info.messageId);
-  console.log(info.envelope)
+  console.log(info.envelope, " => ", indexN)
 }
 
 const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
@@ -43,5 +43,5 @@ let xlKeys = Object.keys(xlData);
 for (let i = 1; i < xlKeys.length - 1; i++) {
   const key = xlKeys[i];
   const emailName = xlData[key].v;
-  main(emailName, htmlFile).catch(console.error);
+  main(emailName, htmlFile, i).catch(console.error);
 }
