@@ -26,14 +26,15 @@ async function main(toEmail, htmlBody, indexN) {
 		to: toEmail, // list of receivers
 		subject: process.env.EMAIL_SUBJECT, // Subject line
 		text: process.env.EMAIL_TEXT, // plain text body
-		html: htmlBody, // html body
+		// html: htmlBody, // html body
 	});
 
 	console.log("Message sent: %s", info.messageId);
 	console.log(info.envelope, " => ", indexN)
 }
 
-const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
+// const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
+const htmlFile = null
 
 let workbook = XLSX.readFile("./emails_sendinblue.xlsx");
 let sheet_name_list = workbook.SheetNames;
