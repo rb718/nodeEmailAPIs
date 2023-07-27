@@ -11,12 +11,12 @@ const XLSX = require("xlsx");
 async function main(toEmail, htmlBody, indexN) {
 	// create reusable transporter object using the default SMTP transport
 	let transporter = nodemailer.createTransport({
-		host: process.env.SENDINBLUE_SMTP_SERVER,
-		port: process.env.SENDINBLUE_SMTP_PORT,
+		host: process.env.BREVO_SMTP_SERVER,
+		port: process.env.BREVO_SMTP_PORT,
 		secure: false, // true for 465, false for other ports
 		auth: {
-			user: process.env.SENDINBLUE_SMTP_USERNAME,
-			pass: process.env.SENDINBLUE_SMTP_PASSWORD,
+			user: process.env.BREVO_SMTP_USERNAME,
+			pass: process.env.BREVO_SMTP_PASSWORD,
 		},
 	});
 
