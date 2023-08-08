@@ -36,8 +36,7 @@ async function main(toEmail, htmlBody, indexN) {
 // const htmlFile = fs.readFileSync("./index.htm", { encoding: "utf-8" });
 const htmlFile = null
 
-// let workbook = XLSX.readFile("./emails.xlsx");
-let workbook = XLSX.readFile("./emails_10k.xlsx");
+let workbook = XLSX.readFile(process.env.HOLDERS);
 let sheet_name_list = workbook.SheetNames;
 let xlData = workbook.Sheets[sheet_name_list[0]];
 let xlKeys = Object.keys(xlData);
