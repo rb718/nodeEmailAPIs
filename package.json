@@ -6,6 +6,7 @@
     "dotenv": "^16.0.3",
     "mailgun.js": "^8.2.1",
     "mailtrap": "^3.1.1",
+    "node-cron": "^3.0.2",
     "nodemailer": "^6.9.1",
     "xlsx": "^0.18.5"
   }
