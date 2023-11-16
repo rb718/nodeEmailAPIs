@@ -48,9 +48,11 @@ for (let i = 1; i < xlKeys.length - 1; i += 2) {
   const keyA = xlKeys[i];
   const emailName = xlData[keyA].v;
   const keyB = xlKeys[i + 1];
-  const firstName = xlData[keyB].v;
+  const fullName = xlData[keyB].v;
+  const firstName = fullName.split(" ")[0];
+  // const lastName = fullName.split(" ")[1];
   countRow += 1;
-  console.log(countRow);
-  // console.log(emailName, firstName);
+  // console.log(countRow);
+  // console.log(emailName, firstName, lastName);
   main(emailName, firstName, htmlFile, countRow).catch(console.error);
 }
